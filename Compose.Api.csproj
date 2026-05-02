@@ -6,7 +6,7 @@
     <RootNamespace>EmailPlatform.Compose</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="EmailPlatform.Shared" Version="1.0.0" />
+    <ProjectReference Include="..\shared\Shared.csproj" />
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
     <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
     <PackageReference Include="Serilog.Formatting.Compact" Version="3.0.0" />
