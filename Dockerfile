@@ -2,15 +2,14 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-COPY Directory.Build.props ./
-COPY src/Shared/Shared.csproj                  src/Shared/
-COPY src/Compose.Api/Compose.Api.csproj        src/Compose.Api/
-RUN dotnet restore src/Compose.Api/Compose.Api.csproj
+COPY shared/Shared.csproj                  shared/
+COPY compose/Compose.Api.csproj            compose/
+RUN dotnet restore compose/Compose.Api.csproj
 
-COPY src/Shared/          src/Shared/
-COPY src/Compose.Api/     src/Compose.Api/
+COPY shared/          shared/
+COPY compose/         compose/
 
-RUN dotnet publish src/Compose.Api/Compose.Api.csproj \
+RUN dotnet publish compose/Compose.Api.csproj \
     --configuration Release \
     --no-restore \
     --output /app/publish \
@@ -24,4 +23,4 @@ WORKDIR /app
 COPY --from=build /app/publish .
 USER $APP_UID
 EXPOSE 8080
-ENTRYPOINT ["dotnet", "EmailPlatform.Compose.Api.dll"]
+ENTRYPOINT ["dotnet", "Compose.Api.dll"]
